@@ -89,7 +89,7 @@ public class PWM {
         System.out.println();
         int count=0;
         for(int j=index;j<targetSeq.length();j++){
-            if(count==8) break;
+            if(count==9) break;
             output+=targetSeq.substring(j,j+1);
             count++;
         }
