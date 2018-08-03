@@ -2,12 +2,12 @@ import java.lang.*;
 
 
 public class smith_waterman{
-    private String A,B;  /**two string to be aligned*/
-    private String[][] scoring_scheme;  /**scoring scheme*/
-    private float penalty;  /**empty space penalty*/
-    private float[][] scoring_dataSheet;  /**scoring matrix*/
-    private String[] answer;  /**answer string*/
-    private int count=-1;  /**records of length*/
+    private String A,B;  //two string to be aligned
+    private String[][] scoring_scheme;  //scoring scheme
+    private float penalty;  //empty space penalty
+    private float[][] scoring_dataSheet;  //scoring matrix
+    private String[] answer;  //answer string
+    private int count=-1;  //records of length
 
     public smith_waterman(String types){
         switch (types){
@@ -165,6 +165,7 @@ public class smith_waterman{
      * @param j
      * @param traceBack_direction
      */
+
     private void traceBack_local(int i,int j,String traceBack_direction){
         try{
             count++;  /**counting every time to obtain the length of alignment*/
