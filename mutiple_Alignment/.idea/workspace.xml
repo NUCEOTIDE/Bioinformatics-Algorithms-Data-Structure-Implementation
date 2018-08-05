@@ -15,12 +15,8 @@
       <file leaf-file-name="multiple_alignment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/multiple_alignment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
-              <folding>
-                <element signature="e#2813#2814#0" expanded="true" />
-                <element signature="e#2869#2870#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="594">
+              <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -220,10 +216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="e#2813#2814#0" expanded="true" />
-            <element signature="e#2869#2870#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -274,12 +266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/multiple_alignment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
-          <folding>
-            <element signature="e#2813#2814#0" expanded="true" />
-            <element signature="e#2869#2870#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="594">
+          <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
         </state>
       </provider>
     </entry>

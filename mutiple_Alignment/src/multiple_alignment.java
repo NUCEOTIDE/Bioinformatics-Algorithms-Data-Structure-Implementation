@@ -80,8 +80,13 @@ public class multiple_alignment {
      *      comparing all the possible combination to obtain
      *      maximum value in all align positions
      */
-    public void dynamicProgramming_alibnment(){
-        Nth_dimensionalMatrix_initial();
+    public void dynamicProgramming_alignment(){
+        int[] temp_positionCoord=new int[1];
+        for(int i=0;i<target_seq[0].length();i++){
+            temp_positionCoord[0]=i;
+            Nth_dimensionalMatrix_initial(0,temp_positionCoord);
+        }
+
     }
 
     /**
@@ -104,29 +109,44 @@ public class multiple_alignment {
             position+=current_positionCoord[current_positionCoord.length];
             mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0);
             return;
-        }
-        else{
-            int[] nextCord=new int[current_positionCoord.length+1];
+        }else{
+            int[] nextCoord=new int[current_positionCoord.length+1];
             for(int i=0;i<target_seq[0].length();i++){
-                nextCord[nextCord.length-1]=i;
-                Nth_dimensionalMatrix_initial(current_dimensionIndex+1,nextCord);
+                nextCoord[nextCoord.length-1]=i;
+                Nth_dimensionalMatrix_initial(current_dimensionIndex+1,nextCoord);
             }
-
         }
+        return;
     }
 
-    private  void Nth_dimensionalMatrix_starting(){
-        for(int i=0;i<mutiDimension_matrix.length;i++){
-            int[] temp_coordination=mutiDimension_matrix[i].getCoordination();
-            for(int j=0;j<temp_coordination.length;j++)
-                if(temp_coordination[j]==0) mutiDimension_matrix[i].setData(0);
+    private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
+        if(current_dimensionIndex==dimension-1){
+            int position=0;
+            for(int k=0;k<current_positionCoord.length-1;k++){
+                position+=current_positionCoord[k]*target_seq.length;
+            }
+            position+=current_positionCoord[current_positionCoord.length];
+            mutiDimension_matrix[position].setData(maximum(current_positionCoord));
+            return;
+        }else{
+            int[] nextCoord=new int[current_positionCoord.length+1];
+            for(int i=0;i<target_seq[0].length();i++){
+                nextCoord[nextCoord.length-1]=i;
+                Nth_dimensionalMatrix_generate(current_dimensionIndex+1,nextCoord);
+            }
         }
+        return;
     }
 
-    private void Nth_dimensionalMatrix_generate(){
-        for(int i=0;i<mutiDimension_matrix.length;i++){
-            mutiDimension_matrix[i]=new Nth_dimentionPoint();
+    private float maximum(int[] coordination){
+        int temp_score=0;
+        int position=0;
+        for(int i=0;i<coordination.length-1;i++){
+            position+=coordination[i]*target_seq.length;
         }
+        position+=coordination[coordination.length];
+        mutiDimension_matrix[position]=0;
+        return temp_score;
     }
 
     private void Nth_dimensionalMatrix_traceback(Nth_dimentionPoint currentPoint,int[] direction){
