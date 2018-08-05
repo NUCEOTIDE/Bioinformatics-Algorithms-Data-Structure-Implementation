@@ -1,5 +1,5 @@
 public class Nth_dimentionPoint {
-    private int coordination[];  //点的坐标
+    private int[] coordination;  //点的坐标
     private int dimension;  //坐标维数
     private float data;  //保存每个普通点上的数据
 
