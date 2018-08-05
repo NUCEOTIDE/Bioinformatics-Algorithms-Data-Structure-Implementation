@@ -18,8 +18,8 @@
       <file leaf-file-name="smith_waterman.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="9" selection-end-column="46" />
+            <state relative-caret-position="-2175">
+              <caret line="106" column="51" lean-forward="true" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
               <folding>
                 <element signature="e#13383#13384#0" expanded="true" />
                 <element signature="e#13412#13413#0" expanded="true" />
@@ -116,7 +116,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="950" />
+    <option name="x" value="668" />
+    <option name="y" value="36" />
     <option name="width" value="979" />
     <option name="height" value="1040" />
   </component>
@@ -246,7 +247,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -285,49 +286,49 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>295</line>
           <properties />
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>174</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>73</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>212</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>214</line>
           <properties />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>216</line>
           <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>209</line>
           <properties />
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url />
+          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
           <line>309</line>
           <properties class="smith_waterman" method="answerConstructing">
             <option name="EMULATED" value="true" />
@@ -866,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="9" selection-end-column="46" />
+        <state relative-caret-position="-2175">
+          <caret line="106" column="51" lean-forward="true" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
           <folding>
             <element signature="e#13383#13384#0" expanded="true" />
             <element signature="e#13412#13413#0" expanded="true" />
