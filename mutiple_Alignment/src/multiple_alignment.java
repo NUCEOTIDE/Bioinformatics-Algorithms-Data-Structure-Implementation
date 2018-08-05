@@ -140,12 +140,14 @@ public class multiple_alignment {
 
     private float maximum(int[] coordination){
         int temp_score=0;
-        int position=0;
-        for(int i=0;i<coordination.length-1;i++){
-            position+=coordination[i]*target_seq.length;
+        int[] binary_direction=new int[coordination.length];
+        for(int i=0;i<(coordination.length)*target_seq[0].length();i++){
+            for(int pos=0;pos<coordination.length;pos++){
+                binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
+                if(temp_score<mutiDimension_matrix[])
+            }
         }
-        position+=coordination[coordination.length];
-        mutiDimension_matrix[position]=0;
+
         return temp_score;
     }
 
