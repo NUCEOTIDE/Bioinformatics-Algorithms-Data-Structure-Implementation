@@ -27,9 +27,9 @@ public class Burrows_Wheeler {
         temp=recycleMatrix;
     }
     private void recycleMatrix_sorting(int current_i,int i_max,int k){
-        if(k>=input.length()-1) return;
+        //getRecycleMatrix();
+        if(k>input.length()-1) return;
         System.out.println("sorting start, level: "+k);
-        int temp_interval=0;
         for(int i=current_i;i<i_max;i++){
             int temp_pos=i;
             for(int j=i+1;j<=i_max;j++){
@@ -42,12 +42,12 @@ public class Burrows_Wheeler {
         }
         System.out.println("sorting complete, level: "+k);
         for(int i=current_i;i<i_max;){
+            int temp_interval=0;
             for(int j=i+1;j<=i_max;j++){
                 if(temp[i].charAt(k)==temp[j].charAt(k))
                     temp_interval++;
                 else if(temp_interval!=0){
-                    k++;
-                    recycleMatrix_sorting(i,i+temp_interval,k);
+                    recycleMatrix_sorting(i,i+temp_interval,k+1);
                     break;
                 }
             }
@@ -55,7 +55,16 @@ public class Burrows_Wheeler {
         }
         return;
     }
+    private void getRecycleMatrix(){
+        for(int i=0;i<recycleMatrix.length;i++){
+            for(int j=0;j<recycleMatrix[0].length();j++)
+                System.out.print(recycleMatrix[i].charAt(j));
+            System.out.println();
+        }
+
+    }
     private void answer_outputting(){
+        System.out.println("current answer: ");
         for(int i=0;i<recycleMatrix.length;i++)
             output+=recycleMatrix[i].substring(input.length()-1);
         System.out.println(output);
