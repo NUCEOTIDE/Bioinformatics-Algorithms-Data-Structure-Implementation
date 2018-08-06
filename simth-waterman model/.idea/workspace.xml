@@ -18,7 +18,7 @@
       <file leaf-file-name="smith_waterman.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2250">
+            <state relative-caret-position="-2790">
               <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
             </state>
           </provider>
@@ -36,7 +36,7 @@
       <file leaf-file-name="Exception.java" pinned="false" current-in-tab="false">
         <entry file="jar://D:/jdk1.8.0_121/src.zip!/java/lang/Exception.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
+            <state relative-caret-position="702">
               <caret line="65" column="10" selection-start-line="65" selection-start-column="10" selection-end-line="65" selection-end-column="10" />
               <folding>
                 <element signature="e#1663#1664#0" expanded="true" />
@@ -91,7 +91,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="950" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -102,6 +102,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -118,9 +119,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,8 +222,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952926" />
@@ -237,7 +236,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32952926" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10589813" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.107238606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -704,7 +703,7 @@
     </entry>
     <entry file="jar://D:/jdk1.8.0_121/src.zip!/java/lang/Exception.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="702">
           <caret line="65" column="10" selection-start-line="65" selection-start-column="10" selection-end-line="65" selection-end-column="10" />
           <folding>
             <element signature="e#1663#1664#0" expanded="true" />
@@ -722,7 +721,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2250">
+        <state relative-caret-position="-2790">
           <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
         </state>
       </provider>

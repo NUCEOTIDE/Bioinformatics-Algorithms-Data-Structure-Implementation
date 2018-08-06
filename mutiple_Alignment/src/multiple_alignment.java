@@ -104,7 +104,7 @@ public class multiple_alignment {
         if(current_dimensionIndex==dimension-1){
             int position=0;
             for(int k=0;k<current_positionCoord.length-1;k++){
-                position+=current_positionCoord[k]*target_seq.length;
+                position+=current_positionCoord[k]*target_seq[0].length();
             }
             position+=current_positionCoord[current_positionCoord.length];
             mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0);
@@ -121,12 +121,8 @@ public class multiple_alignment {
 
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
-            int position=0;
-            for(int k=0;k<current_positionCoord.length-1;k++){
-                position+=current_positionCoord[k]*target_seq.length;
-            }
-            position+=current_positionCoord[current_positionCoord.length];
-            mutiDimension_matrix[position].setData(maximum(current_positionCoord));
+            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
+            mutiDimension_matrix[position].setData(maximum(current_positionCoord,position));
             return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -138,17 +134,23 @@ public class multiple_alignment {
         return;
     }
 
-    private float maximum(int[] coordination){
-        int temp_score=0;
+    private float maximum(int[] coordination,int position){
+        float final_score=0;
         int[] binary_direction=new int[coordination.length];
         for(int i=0;i<(coordination.length)*target_seq[0].length();i++){
             for(int pos=0;pos<coordination.length;pos++){
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
-                if(temp_score<mutiDimension_matrix[])
             }
+            int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq.length);
+            float temp_score=mutiDimension_matrix[previousPosition].getData()+matching(position,binary_direction);
+            if(final_score<temp_score)
+                final_score=temp_score;
         }
+        return final_score;
+    }
 
-        return temp_score;
+    private float matching(int position,int[] direction){
+
     }
 
     private void Nth_dimensionalMatrix_traceback(Nth_dimentionPoint currentPoint,int[] direction){
