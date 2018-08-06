@@ -13,7 +13,7 @@ public class multiple_alignment {
     //private int count=-1;  //records of length
 
 
-    public static multiple_alignment Setmutiple_alignment(String type){
+    public static multiple_alignment Setmultiple_alignment(String type){
         switch(type){
             case "default":{
                 multiple_alignment temp=new multiple_alignment();
@@ -22,6 +22,10 @@ public class multiple_alignment {
             case "input":{
                 Scanner s=new Scanner(System.in);
                 multiple_alignment temp=new multiple_alignment(s);
+                return temp;
+            }
+            case "homework":{
+                multiple_alignment temp=new multiple_alignment(true);
                 return temp;
             }
             default:{
@@ -52,6 +56,9 @@ public class multiple_alignment {
         for(int i=0;i<answer.length;i++)
             answer[i]="";
     }
+    public multiple_alignment(boolean isHomework){
+
+    }
     public multiple_alignment(Scanner a){
         try{
             System.out.println("Please indicate the size of the database: ");
@@ -64,6 +71,7 @@ public class multiple_alignment {
             syllabus=a.nextLine();
             System.out.println("Please input gap penalty: ");
             penalty=a.nextFloat();
+            System.out.println("Please input scoring scheme: ");
             mutiDimension_matrix=new Nth_dimentionPoint[(int)Math.pow(target_seq[0].length(),dimension)]; //to be implemented
         }catch(Exception e){
             switch(e.getMessage()){
@@ -137,7 +145,7 @@ public class multiple_alignment {
     private float maximum(int[] coordination,int position){
         float final_score=0;
         int[] binary_direction=new int[coordination.length];
-        for(int i=0;i<(coordination.length)*target_seq[0].length();i++){
+        for(int i=0;i<coordination.length*target_seq[0].length();i++){
             for(int pos=0;pos<coordination.length;pos++){
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
@@ -151,6 +159,16 @@ public class multiple_alignment {
 
     private float matching(int position,int[] direction){
 
+    }
+
+    private void sortTarget_seq(){
+        int longestString_index=0;
+        for(int i=1;i<target_seq.length;i++)
+            if(target_seq[longestString_index].length()<target_seq[i].length())
+                longestString_index=i;
+        String temp=target_seq[0];
+        target_seq[0]=target_seq[longestString_index];
+        target_seq[longestString_index]=temp;
     }
 
     private void Nth_dimensionalMatrix_traceback(Nth_dimentionPoint currentPoint,int[] direction){
