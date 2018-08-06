@@ -4,13 +4,11 @@ public class multiple_alignment {
 
     private String[] target_seq;  //two string to be aligned
     private float[][] scoring_scheme;  //scoring scheme
-    private String syllabus;
+    private String syllabus;  //syllabus string
     private float penalty;  //empty space penalty
-    private int dimension;
+    private int dimension;  //indicate dimension
     private Nth_dimentionPoint[] mutiDimension_matrix;  //multiple dimensional matrix
-    //private float[] scoring_dataSheet_1d;  //scoring matrix
     private String[] answer;  //answer string array
-    //private int count=-1;  //records of length
 
 
     public static multiple_alignment Setmultiple_alignment(String type){
@@ -18,19 +16,14 @@ public class multiple_alignment {
             case "default":{
                 multiple_alignment temp=new multiple_alignment();
                 return temp;
-            }
-            case "input":{
+            }case "input":{
                 Scanner s=new Scanner(System.in);
                 multiple_alignment temp=new multiple_alignment(s);
                 return temp;
-            }
-            case "homework":{
+            }case "homework":{
                 multiple_alignment temp=new multiple_alignment(true);
                 return temp;
-            }
-            default:{
-                return null;
-            }
+            }default: return null;
         }
     }
     public multiple_alignment(){
@@ -94,6 +87,10 @@ public class multiple_alignment {
             temp_positionCoord[0]=i;
             Nth_dimensionalMatrix_initial(0,temp_positionCoord);
         }
+        for(int j=0;j<target_seq[0].length();j++){
+            temp_positionCoord[0]=j;
+            Nth_dimensionalMatrix_generate(0,temp_positionCoord);
+        }
 
     }
 
@@ -111,9 +108,8 @@ public class multiple_alignment {
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
             int position=0;
-            for(int k=0;k<current_positionCoord.length-1;k++){
+            for(int k=0;k<current_positionCoord.length-1;k++)
                 position+=current_positionCoord[k]*target_seq[0].length();
-            }
             position+=current_positionCoord[current_positionCoord.length];
             mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
             return;
@@ -129,8 +125,13 @@ public class multiple_alignment {
 
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
-            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
-            mutiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
+            int temp_coordinateSum=0;
+            for(int i=0;i<current_positionCoord.length;i++)
+                if(current_positionCoord[i]!=0) temp_coordinateSum++;
+            if(temp_coordinateSum>1){
+                int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
+                mutiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
+            }
             return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -145,7 +146,7 @@ public class multiple_alignment {
     private float maximum(int[] coordination,int position){
         float final_score=0;
         int[] binary_direction=new int[coordination.length];
-        for(int i=0;i<coordination.length*target_seq[0].length();i++){
+        for(int i=1;i<coordination.length*target_seq[0].length();i++){
             for(int pos=0;pos<coordination.length;pos++){
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
@@ -159,6 +160,7 @@ public class multiple_alignment {
 
     private float matching(int position,int[] direction){
 
+        return (float)1.11;
     }
 
     private void sortTarget_seq(){
