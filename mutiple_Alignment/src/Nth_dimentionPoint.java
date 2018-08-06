@@ -16,7 +16,6 @@ public class Nth_dimentionPoint {
     }
 
 
-    
     public static int Nth_to_1st_dimension(int[] coordination,int length){
         int position=0;
         for(int k=0;k<coordination.length-1;k++){
