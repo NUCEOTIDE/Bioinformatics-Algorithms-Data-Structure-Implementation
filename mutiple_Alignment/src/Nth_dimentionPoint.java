@@ -1,11 +1,13 @@
 public class Nth_dimentionPoint {
     private int[] coordination;  //point coordination in Nth dimension
     private int dimension;  //num of dimension
-    private float data;  //data in point
+    private float score;  //score in point
+    private char[] seq; //sequence data at the point
 
-    public Nth_dimentionPoint(int new_dimension,int[] new_coordination, float new_data){
+    public Nth_dimentionPoint(int new_dimension,int[] new_coordination,float new_score,String[] target_seq){
         coordination=new int[new_dimension];
-        data=new_data;
+        score=new_score;
+
     }
 
     public void setCoordination(int[] new_coordination){
@@ -13,8 +15,8 @@ public class Nth_dimentionPoint {
         for(int i=0;i<new_coordination.length;i++)
             coordination[i]=new_coordination[i];
     }
-    public void setData(float new_data){
-        data=new_data;
+    public void setScore(float new_score){
+        score=new_score;
     }
     
     public static int Nth_to_1st_dimension(int[] coordination,int length){
@@ -39,8 +41,8 @@ public class Nth_dimentionPoint {
     }
 
     //get methods
-    public float getData() {
-        return this.data;
+    public float getScore() {
+        return this.score;
     }
     public int getDimension(){
         return this.dimension;

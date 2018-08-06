@@ -91,7 +91,7 @@ public class multiple_alignment {
 
     /**
      * the 2nd main mutiple seq alignment method
-     *      using CLASTALW model,
+     *      using CLASTALW model, or improved T-coffee model
      *      comparing all the pair-wise alignments,
      *      build the phylogenetic tree
      *      align the seq defined by tree (bottom up)
@@ -107,7 +107,7 @@ public class multiple_alignment {
                 position+=current_positionCoord[k]*target_seq[0].length();
             }
             position+=current_positionCoord[current_positionCoord.length];
-            mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0);
+            mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
             return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -122,7 +122,7 @@ public class multiple_alignment {
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
             int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
-            mutiDimension_matrix[position].setData(maximum(current_positionCoord,position));
+            mutiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
             return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -142,7 +142,7 @@ public class multiple_alignment {
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
             int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq.length);
-            float temp_score=mutiDimension_matrix[previousPosition].getData()+matching(position,binary_direction);
+            float temp_score=mutiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
             if(final_score<temp_score)
                 final_score=temp_score;
         }
