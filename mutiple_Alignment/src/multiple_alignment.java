@@ -1,29 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class multiple_alignment {
 
     private String[] target_seq;  //two string to be aligned
     private float[][] scoring_scheme;  //scoring scheme
-    private String syllabus;  //syllabus string
+    private String syllabus;  //syllabus string,should contain the gap symbol
     private float penalty;  //empty space penalty
     private int dimension;  //indicate dimension
-    private Nth_dimentionPoint[] mutiDimension_matrix;  //multiple dimensional matrix
+    private Nth_dimentionPoint[] multiDimension_matrix;  //multiple dimensional matrix
     private String[] answer;  //answer string array
 
 
     public static multiple_alignment Setmultiple_alignment(String type){
         switch(type){
-            case "default":{
-                multiple_alignment temp=new multiple_alignment();
-                return temp;
-            }case "input":{
+            case "default": return new multiple_alignment();
+            case "input":{
                 Scanner s=new Scanner(System.in);
-                multiple_alignment temp=new multiple_alignment(s);
-                return temp;
-            }case "homework":{
-                multiple_alignment temp=new multiple_alignment(true);
-                return temp;
-            }default: return null;
+                return new multiple_alignment(s);
+            }
+            case "homework": return new multiple_alignment(true);
+            default: return null;
         }
     }
     public multiple_alignment(){
@@ -60,12 +58,12 @@ public class multiple_alignment {
             System.out.println("Please input target sequences (seperate with \\n): ");
             for(int i=0;i<target_seq.length;i++)
                 target_seq[i]=a.nextLine();
-            System.out.println("Please input any seq that contains all/(but just) syllabus: "); //wait to be implemented
+            System.out.println("Please input any seq that contains all(include '-') syllabus: "); //wait to be implemented
             syllabus=a.nextLine();
             System.out.println("Please input gap penalty: ");
             penalty=a.nextFloat();
             System.out.println("Please input scoring scheme: ");
-            mutiDimension_matrix=new Nth_dimentionPoint[(int)Math.pow(target_seq[0].length(),dimension)]; //to be implemented
+            multiDimension_matrix=new Nth_dimentionPoint[(int)Math.pow(target_seq[0].length()+1,dimension)]; //to be implemented
         }catch(Exception e){
             switch(e.getMessage()){
                 case "NullPointerException": System.out.println("");
@@ -91,7 +89,16 @@ public class multiple_alignment {
             temp_positionCoord[0]=j;
             Nth_dimensionalMatrix_generate(0,temp_positionCoord);
         }
-
+        List<Integer> maximunIndex=new ArrayList<>();
+        maximunIndex.add(0);
+        for(int k=1;k<multiDimension_matrix.length;k++){
+            if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore())
+                maximunIndex.set(0,k);
+            else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
+                maximunIndex.add(k);
+        }
+        for(int m=0;m<maximunIndex.size();m++)
+            Nth_dimensionalMatrix_traceback(multiDimension_matrix[m],null);
     }
 
     /**
@@ -107,11 +114,8 @@ public class multiple_alignment {
 
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
-            int position=0;
-            for(int k=0;k<current_positionCoord.length-1;k++)
-                position+=current_positionCoord[k]*target_seq[0].length();
-            position+=current_positionCoord[current_positionCoord.length];
-            mutiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
+            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
+            multiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
             return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -130,7 +134,7 @@ public class multiple_alignment {
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
             if(temp_coordinateSum>1){
                 int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
-                mutiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
+                multiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
             }
             return;
         }else{
@@ -151,7 +155,7 @@ public class multiple_alignment {
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
             int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq.length);
-            float temp_score=mutiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
+            float temp_score=multiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
             if(final_score<temp_score)
                 final_score=temp_score;
         }
@@ -159,8 +163,8 @@ public class multiple_alignment {
     }
 
     private float matching(int position,int[] direction){
-
-        return (float)1.11;
+        multiDimension_matrix[position].setTempSeq(direction);
+        return multiDimension_matrix[position].alignmentScore_sum(scoring_scheme,syllabus,penalty);
     }
 
     private void sortTarget_seq(){

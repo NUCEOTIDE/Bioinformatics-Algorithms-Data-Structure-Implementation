@@ -41,14 +41,15 @@ public class Nth_dimentionPoint {
 
     public float alignmentScore_sum(float[][] scoring_scheme,String syllabus,float penalty){  //Exception to be handled
         float sumScore=0;
-        for(int i=0;i<seq.length;i++)
-            for(int j=i+1;j<seq.length;j++){
+        for(int i=0;i<tempSeq.length;i++)
+            for(int j=i+1;j<tempSeq.length;j++){
                 boolean isReevaluated1=false,isReevaluated2=false;
                 for(int k=0;k<syllabus.length();k++){
-                    if(syllabus.charAt(k)==seq[i]) isReevaluated1=true;
-                    if(syllabus.charAt(k)==seq[j]) isReevaluated2=true;
+                    if(syllabus.charAt(k)==tempSeq[i]) isReevaluated1=true;
+                    if(syllabus.charAt(k)==tempSeq[j]) isReevaluated2=true;
                 }
                 if(isReevaluated1&&isReevaluated2) sumScore+=scoring_scheme[i][j];
+                else if(tempSeq[i]=='-'||tempSeq[j]=='-') sumScore+=penalty;  //else, two '-' should not exist
             }
         return sumScore;
     }
@@ -63,6 +64,12 @@ public class Nth_dimentionPoint {
     public int[] getCoordination() {
         return this.coordination;
     }
+    public char[] getSeq(){
+        return this.seq;
+    }
+    public char[] getTempSeq(){
+        return this.tempSeq;
+    }
 
     //set methods
     public void setCoordination(int[] new_coordination){
@@ -71,5 +78,9 @@ public class Nth_dimentionPoint {
     }
     public void setScore(float new_score){
         score=new_score;
+    }
+    public void setTempSeq(int[] direction){
+        for(int i=0;i<direction.length;i++)
+            if(direction[i]==0) tempSeq[i]='-';
     }
 }
