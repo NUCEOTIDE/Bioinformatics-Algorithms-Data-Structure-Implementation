@@ -18,16 +18,16 @@ public class Nth_dimentionPoint {
     }
 
 
-    public static int Nth_to_1st_dimension(int[] coordination,int length){
+    public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq){
         int position=0;
         for(int k=0;k<coordination.length-1;k++){
-            position+=coordination[k]*length;
+            position+=coordination[k]*target_seq[k].length();
         }
         position+=coordination[coordination.length-1];
         return position;
     }
 
-    public static int previousPosition(int[] currentCoordination,int[] direction,int length){
+    public static int previousPosition(int[] currentCoordination,int[] direction,String[] target_seq){
         int[] previousCoordination=new int[currentCoordination.length];
         try{
             for(int i=0;i<currentCoordination.length;i++)
@@ -35,7 +35,7 @@ public class Nth_dimentionPoint {
         }catch(IndexOutOfBoundsException e){
             System.out.println("something goes wrong...");
         }finally{
-            return Nth_to_1st_dimension(previousCoordination,length);
+            return Nth_to_1st_dimension(previousCoordination,target_seq);
         }
     }
 

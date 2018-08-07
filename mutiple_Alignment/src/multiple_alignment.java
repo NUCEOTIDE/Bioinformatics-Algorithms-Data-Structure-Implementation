@@ -13,7 +13,7 @@ public class multiple_alignment {
     private String[] answer;  //answer string array
 
 
-    public static multiple_alignment Setmultiple_alignment(String type){
+    public static multiple_alignment setMultiple_alignment(String type){
         switch(type){
             case "default": return new multiple_alignment();
             case "input":{
@@ -63,10 +63,14 @@ public class multiple_alignment {
             System.out.println("Please input gap penalty: ");
             penalty=a.nextFloat();
             System.out.println("Please input scoring scheme: ");
-            multiDimension_matrix=new Nth_dimentionPoint[(int)Math.pow(target_seq[0].length()+1,dimension)]; //to be implemented
+            //corrected, using matrix scale only as big as sequence length
+            int dimension_1_length=1;
+            for(int j=0;j<target_seq.length;j++)
+                dimension_1_length*=(target_seq[j].length()+1);
+            multiDimension_matrix=new Nth_dimentionPoint[dimension_1_length];
         }catch(Exception e){
             switch(e.getMessage()){
-                case "NullPointerException": System.out.println("");
+                case "NullPointerException": System.out.println("drunk and han");
                 case "IndexOutOfBondException": System.out.println("Illegal size of target sequence data base, or ");
             }
         }
@@ -81,6 +85,7 @@ public class multiple_alignment {
      */
     public void dynamicProgramming_alignment(){
         int[] temp_positionCoord=new int[1];
+        sortTarget_seq();
         for(int i=0;i<target_seq[0].length();i++){
             temp_positionCoord[0]=i;
             Nth_dimensionalMatrix_initial(0,temp_positionCoord);
@@ -98,11 +103,11 @@ public class multiple_alignment {
                 maximunIndex.add(k);
         }
         for(int m=0;m<maximunIndex.size();m++)
-            Nth_dimensionalMatrix_traceback(multiDimension_matrix[m],null);
+            Nth_dimensionalMztrix_traceback_initial(multiDimension_matrix[m]);
     }
 
     /**
-     * the 2nd main mutiple seq alignment method
+     * the 2nd main multiple seq alignment method
      *      using CLASTALW model, or improved T-coffee model
      *      comparing all the pair-wise alignments,
      *      build the phylogenetic tree
@@ -114,9 +119,8 @@ public class multiple_alignment {
 
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
-            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
+            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
             multiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
-            return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
             for(int i=0;i<target_seq[0].length();i++){
@@ -124,7 +128,6 @@ public class multiple_alignment {
                 Nth_dimensionalMatrix_initial(current_dimensionIndex+1,nextCoord);
             }
         }
-        return;
     }
 
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
@@ -133,10 +136,9 @@ public class multiple_alignment {
             for(int i=0;i<current_positionCoord.length;i++)
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
             if(temp_coordinateSum>1){
-                int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq[0].length());
+                int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
                 multiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
             }
-            return;
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
             for(int i=0;i<target_seq[0].length();i++){
@@ -144,7 +146,6 @@ public class multiple_alignment {
                 Nth_dimensionalMatrix_generate(current_dimensionIndex+1,nextCoord);
             }
         }
-        return;
     }
 
     private float maximum(int[] coordination,int position){
@@ -154,7 +155,7 @@ public class multiple_alignment {
             for(int pos=0;pos<coordination.length;pos++){
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
-            int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq.length);
+            int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq);
             float temp_score=multiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
             if(final_score<temp_score)
                 final_score=temp_score;
@@ -176,7 +177,9 @@ public class multiple_alignment {
         target_seq[0]=target_seq[longestString_index];
         target_seq[longestString_index]=temp;
     }
+    private void Nth_dimensionalMztrix_traceback_initial(Nth_dimentionPoint currentPoint){
 
+    }
     private void Nth_dimensionalMatrix_traceback(Nth_dimentionPoint currentPoint,int[] direction){
 
     }
