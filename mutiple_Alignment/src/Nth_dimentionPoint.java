@@ -3,6 +3,7 @@ public class Nth_dimentionPoint {
     private int dimension;  //num of dimension
     private float score;  //score in point
     private char[] seq; //sequence data at the point
+    private char[] tempSeq;  //sequence data at the point considered gaps and directions
 
     public Nth_dimentionPoint(int new_dimension,int[] new_coordination,float new_score,String[] target_seq){
         coordination=new int[new_dimension];
@@ -13,6 +14,7 @@ public class Nth_dimentionPoint {
         for(int i=0;i<dimension;i++){
             seq[i]=target_seq[i].charAt(coordination[i]);
         }
+        System.arraycopy(seq,0,tempSeq,0,seq.length);
     }
 
 
@@ -21,7 +23,7 @@ public class Nth_dimentionPoint {
         for(int k=0;k<coordination.length-1;k++){
             position+=coordination[k]*length;
         }
-        position+=coordination[coordination.length];
+        position+=coordination[coordination.length-1];
         return position;
     }
 
@@ -65,8 +67,7 @@ public class Nth_dimentionPoint {
     //set methods
     public void setCoordination(int[] new_coordination){
         //coordination=new_coordination;
-        for(int i=0;i<new_coordination.length;i++)
-            coordination[i]=new_coordination[i];
+        System.arraycopy(new_coordination,0,coordination,0,new_coordination.length);
     }
     public void setScore(float new_score){
         score=new_score;

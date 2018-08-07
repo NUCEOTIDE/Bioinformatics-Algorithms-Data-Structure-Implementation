@@ -146,7 +146,7 @@ public class multiple_alignment {
     private float maximum(int[] coordination,int position){
         float final_score=0;
         int[] binary_direction=new int[coordination.length];
-        for(int i=1;i<coordination.length*target_seq[0].length();i++){
+        for(int i=1;i<=Math.pow(2,dimension)-1;i++){
             for(int pos=0;pos<coordination.length;pos++){
                 binary_direction[pos]=(int)(Integer.toBinaryString(i).charAt(pos));
             }
