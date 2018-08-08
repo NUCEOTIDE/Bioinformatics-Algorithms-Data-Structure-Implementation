@@ -12,11 +12,15 @@ public class multiple_alignment {
     private Nth_dimensionPoint[] multiDimension_matrix;  //multiple dimensional matrix
     private String[] answer;  //answer string array
 
-
+    /**
+     * the main constructor_initialize method for multiple alignment class
+     * @param type the type of the call
+     * @return return a null object, mind the NullPointerException
+     */
     public static multiple_alignment setMultiple_alignment(String type){
         switch(type){
             case "default": return new multiple_alignment();
-            case "input":{
+            case "input": {
                 Scanner s=new Scanner(System.in);
                 return new multiple_alignment(s);
             }
@@ -24,7 +28,11 @@ public class multiple_alignment {
             default: return null;
         }
     }
-    public multiple_alignment(){
+
+    /**
+     * default constructor without parameter
+     */
+    private multiple_alignment(){
         //target_seq default initialization
         target_seq=new String[2];
         for(int i=0;i<target_seq.length;i++)
@@ -47,10 +55,20 @@ public class multiple_alignment {
         for(int i=0;i<answer.length;i++)
             answer[i]="";
     }
-    public multiple_alignment(boolean isHomework){
+
+    /**
+     * special constructor method specialized for this project
+     * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
+     */
+    private multiple_alignment(boolean isHomework){
 
     }
-    public multiple_alignment(Scanner a){
+
+    /**
+     * customized constructor requires inputs
+     * @param a a scanner object
+     */
+    private multiple_alignment(Scanner a){
         try{
             System.out.println("Please indicate the size of the database: ");
             dimension=a.nextInt();
@@ -120,6 +138,11 @@ public class multiple_alignment {
         //Nth_dimensionalMatrix_initial(dimension);
     }
 
+    /**
+     * initialize the scoring matrix
+     * @param current_dimensionIndex an index to control the dimensional coordination generation
+     * @param current_positionCoord current position coordination of a point in the matrix
+     */
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
             int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
@@ -133,6 +156,11 @@ public class multiple_alignment {
         }
     }
 
+    /**
+     * generate the score for all points in the matrix
+     * @param current_dimensionIndex an index to control the dimensional coordination generation
+     * @param current_positionCoord current position coordination of a point in the matrix
+     */
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
             int temp_coordinateSum=0;
@@ -151,6 +179,12 @@ public class multiple_alignment {
         }
     }
 
+    /**
+     * method to find the maximum score in one position
+     * @param coordination the coordiantion of the position
+     * @param position the position in 1 dimensional matrix
+     * @return the final maximum score of this point
+     */
     private float maximum(int[] coordination,int position){
         float final_score=0;
         for(int i=1;i<=Math.pow(2,dimension)-1;i++){
@@ -163,11 +197,21 @@ public class multiple_alignment {
         return final_score;
     }
 
+    /**
+     * method to find the score for one given direction
+     * @param position the position in 1 dimensional matrix
+     * @param direction the direction coordination of the point
+     * @return the matching score sum
+     */
     private float matching(int position,int[] direction){
         multiDimension_matrix[position].setTempSeq(direction);
         return multiDimension_matrix[position].alignmentScore_sum(scoring_scheme,syllabus,penalty);
     }
 
+    /**
+     * method to sort the given target sequences and repalace the 1st position with the longest
+     * but doesn't matter any more now
+     */
     private void sortTarget_seq(){
         int longestString_index=0;
         for(int i=1;i<target_seq.length;i++)
@@ -177,12 +221,17 @@ public class multiple_alignment {
         target_seq[0]=target_seq[longestString_index];
         target_seq[longestString_index]=temp;
     }
+
+    /**
+     * trace back to build the answer string
+     * @param currentPoint the current point object
+     */
     private void Nth_dimensionalMatrix_traceBack(Nth_dimensionPoint currentPoint){
         if(currentPoint.getScore()!=0)
             //get direction for both answer building and tracing back process
             for(int i=1;i<=Math.pow(2,dimension)-1;i++){
                 int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
-                int previousPosition
+                int previousPosition  //previous position obtaining method can be changed to simplify
                         =Nth_dimensionPoint.previousPosition(currentPoint.getCoordination(),binary_direction,target_seq);
                 if(multiDimension_matrix[previousPosition].getScore()  //the score of previous point
                         +matching(Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq),binary_direction)
@@ -195,6 +244,5 @@ public class multiple_alignment {
                     Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition]);
                 }
             }
-        else return;
     }
 }

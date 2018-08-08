@@ -7,10 +7,10 @@ public class Nth_dimensionPoint {
 
     /**
      * the constructor of Nth_dimentionPoint class
-     * @param new_dimension
-     * @param new_coordination
-     * @param new_score
-     * @param target_seq
+     * @param new_dimension the dimension of the point
+     * @param new_coordination the coordination of the point
+     * @param new_score the score of the point, initially is 0
+     * @param target_seq the target sequences inputted
      */
     public Nth_dimensionPoint(int new_dimension,int[] new_coordination,float new_score,String[] target_seq){
         coordination=new int[new_dimension];
@@ -26,9 +26,9 @@ public class Nth_dimensionPoint {
 
     /**
      * a static method that convert a Nth coordination to a position in 1 dimensional object array multiDimension_matrix
-     * @param coordination
-     * @param target_seq
-     * @return
+     * @param coordination the coordination of the point
+     * @param target_seq the target sequences inputted
+     * @return a 1 dimensional position
      */
     public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq){
         int position=0;
@@ -44,14 +44,14 @@ public class Nth_dimensionPoint {
 
     /**
      * convert a directional variable into a binary dimension in length of dimension
-     * @param dimension
-     * @param direction
-     * @return
+     * @param dimension the dimension of the point
+     * @param decimal_direction the decimal direction coordination
+     * @return a binary direction
      */
-    public static int[] binaryDirection(int dimension,int direction){
+    public static int[] binaryDirection(int dimension,int decimal_direction){
           //might be errors, because of the different length of the string and binary code
         int[] binary_direction=new int[dimension];
-        String directionString=Integer.toBinaryString(direction);
+        String directionString=Integer.toBinaryString(decimal_direction);
         while(directionString.length()<dimension)
             directionString="0"+directionString;  //may be changed to the string buffer method
         for(int pos=0;pos<dimension;pos++)
@@ -62,10 +62,10 @@ public class Nth_dimensionPoint {
     /**
      * obtain the previous position of a given point
      * may be considered to change to an instant method instead of a static method
-     * @param currentCoordination
-     * @param direction
-     * @param target_seq
-     * @return
+     * @param currentCoordination the current position coordination of the point
+     * @param direction the direction coordination of the point
+     * @param target_seq the target sequences
+     * @return to call another method to convert the position into 1st dimensional
      */
     public static int previousPosition(int[] currentCoordination,int[] direction,String[] target_seq){
         int[] previousCoordination=new int[currentCoordination.length];
@@ -81,10 +81,10 @@ public class Nth_dimensionPoint {
 
     /**
      * calculate the su of all scores at current point
-     * @param scoring_scheme
-     * @param syllabus
-     * @param penalty
-     * @return
+     * @param scoring_scheme the scoring scheme of the seuqences
+     * @param syllabus the syllabus
+     * @param penalty the gap penalty results
+     * @return the sum of scores
      */
     public float alignmentScore_sum(float[][] scoring_scheme,String syllabus,float penalty){  //Exception to be handled
         float sumScore=0;
@@ -129,7 +129,7 @@ public class Nth_dimensionPoint {
 
     /**
      * replace the seq[] with tempSeq[] the difference is the gaps added corresponding to the directions
-     * @param direction
+     * @param direction the binary direction coordination of one pointR
      */
     public void setTempSeq(int[] direction){
         for(int i=0;i<direction.length;i++)
