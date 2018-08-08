@@ -61,19 +61,19 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=4;
+        dimension=2;
         target_seq=new String[dimension];
-        target_seq[0]="AACT";
-        target_seq[1]="AACT";
-        target_seq[2]="AAAC";
-        target_seq[3]="AAAG";
-        penalty=-1;
+        target_seq[0]="ACCGTTAACGTT";
+        target_seq[1]="AACGCGTTACAC";
+//        target_seq[2]="AAAC";
+//        target_seq[3]="AAAG";
+        penalty=-2;
         syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
         for(int i=0;i<syllabus.length();i++)
             for(int j=0;j<syllabus.length();j++){
                 if(syllabus.charAt(i)==syllabus.charAt(j)) scoring_scheme[i][j]=1;
-                else scoring_scheme[i][j]=0;
+                else scoring_scheme[i][j]=-1;
             }
         sortTarget_seq();
         modify_seq();
@@ -132,19 +132,19 @@ public class multiple_alignment {
         Nth_dimensionalMatrix_generate(0,null);
 
         //finding the maximum point in the matrix
-        List<Integer> maximunIndex=new ArrayList<>();
-        maximunIndex.add(0,0);
-        for(int k=1;k<multiDimension_matrix.length;k++){
-            if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore())
-                maximunIndex.set(1,k);
-            else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
-                maximunIndex.add(k);
-        }
-        for(int m=0;m<maximunIndex.size();m++)
-            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
-        for(int n=0;n<answer.length;n++){
-            System.out.println(answer[n]);
-        }
+//        List<Integer> maximunIndex=new ArrayList<>();
+//        maximunIndex.add(0,0);
+//        for(int k=1;k<multiDimension_matrix.length;k++){
+//            if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore())
+//                maximunIndex.set(1,k);
+//            else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
+//                maximunIndex.add(k);
+//        }
+//        for(int m=0;m<maximunIndex.size();m++)
+//            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
+//        for(int n=0;n<answer.length;n++){
+//            System.out.println(answer[n]);
+//        }
     }
 
     /**

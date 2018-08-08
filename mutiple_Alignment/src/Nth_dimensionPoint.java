@@ -89,16 +89,24 @@ public class Nth_dimensionPoint {
      */
     public float alignmentScore_sum(float[][] scoring_scheme,String syllabus,float penalty){  //Exception to be handled
         float sumScore=0;
-        for(int i=1;i<tempSeq.length;i++)
+        for(int i=0;i<tempSeq.length-1;i++)
             for(int j=i+1;j<tempSeq.length;j++){
                 boolean isReevaluated1=false,isReevaluated2=false;
+                int indexI=0,indexJ=0;
                 for(int k=0;k<syllabus.length();k++){
-                    if(syllabus.charAt(k)==tempSeq[i]) isReevaluated1=true;
-                    if(syllabus.charAt(k)==tempSeq[j]) isReevaluated2=true;
+                    if(syllabus.charAt(k)==tempSeq[i]){
+                        isReevaluated1=true;
+                        indexI=k;
+                    }
+                    if(syllabus.charAt(k)==tempSeq[j]){
+                        isReevaluated2=true;
+                        indexJ=k;
+                    }
                 }
-                if(isReevaluated1&&isReevaluated2) sumScore+=scoring_scheme[i][j];
+                if(isReevaluated1&&isReevaluated2) sumScore+=scoring_scheme[indexI][indexJ];
                 else if(tempSeq[i]=='-'||tempSeq[j]=='-') sumScore+=penalty;  //else, two '-' should not exist
             }
+        System.arraycopy(seq,0,tempSeq,0,seq.length);
         return sumScore;
     }
 
