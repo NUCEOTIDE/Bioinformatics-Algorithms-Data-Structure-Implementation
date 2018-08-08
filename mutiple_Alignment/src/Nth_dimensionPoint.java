@@ -32,9 +32,9 @@ public class Nth_dimensionPoint {
      */
     public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq){
         int position=0;
-        for(int k=0;k<coordination.length;k++){
+        for(int k=0;k<coordination.length-1;k++){
             int positionComponent=coordination[k];
-            for(int m=k+1;m<coordination.length-1;m++)
+            for(int m=k+1;m<coordination.length;m++)
                 positionComponent*=target_seq[m].length();
             position+=positionComponent;
         }
@@ -54,8 +54,9 @@ public class Nth_dimensionPoint {
         String directionString=Integer.toBinaryString(decimal_direction);
         while(directionString.length()<dimension)
             directionString="0"+directionString;  //may be changed to the string buffer method
+            //System.out.println(directionString);
         for(int pos=0;pos<dimension;pos++)
-            binary_direction[pos]=(int)directionString.charAt(pos);
+            binary_direction[pos]=(int)directionString.charAt(pos)-48;
         return binary_direction;
     }
 
@@ -88,7 +89,7 @@ public class Nth_dimensionPoint {
      */
     public float alignmentScore_sum(float[][] scoring_scheme,String syllabus,float penalty){  //Exception to be handled
         float sumScore=0;
-        for(int i=0;i<tempSeq.length;i++)
+        for(int i=1;i<tempSeq.length;i++)
             for(int j=i+1;j<tempSeq.length;j++){
                 boolean isReevaluated1=false,isReevaluated2=false;
                 for(int k=0;k<syllabus.length();k++){

@@ -63,17 +63,17 @@ public class multiple_alignment {
     public multiple_alignment(boolean isHomework){
         dimension=4;
         target_seq=new String[dimension];
-        target_seq[0]="TCA";
-        target_seq[1]="CGTTA";
-        target_seq[2]="ATCG";
-        target_seq[3]="ACTG";
+        target_seq[0]="AACT";
+        target_seq[1]="AACT";
+        target_seq[2]="AAAC";
+        target_seq[3]="AAAG";
         penalty=-1;
         syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
         for(int i=0;i<syllabus.length();i++)
             for(int j=0;j<syllabus.length();j++){
                 if(syllabus.charAt(i)==syllabus.charAt(j)) scoring_scheme[i][j]=1;
-                else scoring_scheme[i][j]=(float)0.5;
+                else scoring_scheme[i][j]=0;
             }
         sortTarget_seq();
         modify_seq();
@@ -133,10 +133,10 @@ public class multiple_alignment {
 
         //finding the maximum point in the matrix
         List<Integer> maximunIndex=new ArrayList<>();
-        maximunIndex.add(0);
+        maximunIndex.add(0,0);
         for(int k=1;k<multiDimension_matrix.length;k++){
             if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore())
-                maximunIndex.set(0,k);
+                maximunIndex.set(1,k);
             else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
                 maximunIndex.add(k);
         }
@@ -154,7 +154,7 @@ public class multiple_alignment {
      *      build the phylogenetic tree
      *      align the seq defined by tree (bottom up)
      */
-    public void phylogeneticTree_alignment(){
+    public void Tcoffee_alignment(){
         //Nth_dimensionalMatrix_initial(dimension);
     }
 
@@ -201,7 +201,7 @@ public class multiple_alignment {
             int[] temp_positionCoord=new int[1];
             for(int i=0;i<target_seq[0].length();i++){
                 temp_positionCoord[0]=i;
-                Nth_dimensionalMatrix_initial(1,temp_positionCoord);
+                Nth_dimensionalMatrix_generate(1,temp_positionCoord);
             }
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
@@ -220,13 +220,15 @@ public class multiple_alignment {
      * @return the final maximum score of this point
      */
     private float maximum(int[] coordination,int position){
-        float final_score=0;
+        float final_score=-10000000;
         for(int i=1;i<=Math.pow(2,dimension)-1;i++){
             int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
             int previousPosition=Nth_dimensionPoint.previousPosition(coordination,binary_direction,target_seq);
-            float temp_score=multiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
-            if(final_score<temp_score)
-                final_score=temp_score;
+            if(previousPosition>=0){
+                float temp_score=multiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
+                if(final_score<temp_score)
+                    final_score=temp_score;
+            }
         }
         return final_score;
     }
@@ -286,7 +288,26 @@ public class multiple_alignment {
     }
 
     public void get_multiDimensionMatrix(){
-        for(int i=0;i<multiDimension_matrix.length;i++)
-            System.out.println(multiDimension_matrix[i].getSeq()+" ");
+        try{
+            for(int i=0;i<multiDimension_matrix.length;i++){
+                int[] temp_string=multiDimension_matrix[i].getCoordination();
+                System.out.print("{");
+                for(int j=0;j<temp_string.length;j++)
+                    System.out.print(temp_string[j]+",");
+                System.out.println("}"+multiDimension_matrix[i].getScore());
+            }
+        }catch (NullPointerException e){
+            System.out.println("null character exist for unknown reason");
+        }
+    }
+
+    public void getScoring_scheme(){
+        System.out.println(syllabus);
+        for(int i=0;i<scoring_scheme.length;i++){
+            System.out.print(syllabus.charAt(i)+" ");
+            for(int j=0;j<scoring_scheme[0].length;j++)
+                System.out.print(scoring_scheme[i][j]+" ");
+            System.out.println();
+        }
     }
 }

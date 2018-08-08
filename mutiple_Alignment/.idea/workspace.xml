@@ -12,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="multiple_alignment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="multiple_alignment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/multiple_alignment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="165" column="35" lean-forward="true" selection-start-line="165" selection-start-column="35" selection-end-line="165" selection-end-column="35" />
+            <state relative-caret-position="234">
+              <caret line="142" selection-start-line="142" selection-end-line="146" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#setMultiple_alignment#0;class#multiple_alignment#0" />
@@ -25,6 +25,7 @@
                 <element signature="method#multiple_alignment#0;class#multiple_alignment#0" />
                 <element signature="docComment;method#multiple_alignment#2;class#multiple_alignment#0" />
                 <element signature="method#multiple_alignment#2;class#multiple_alignment#0" />
+                <element signature="docComment;method#Nth_dimensionalMatrix_generate#0;class#multiple_alignment#0" />
               </folding>
             </state>
           </provider>
@@ -33,21 +34,21 @@
       <file leaf-file-name="Nth_dimensionPoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Nth_dimensionPoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="-94">
+              <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="91" selection-end-column="19" />
               <folding>
-                <element signature="e#4950#4951#0" expanded="true" />
-                <element signature="e#4983#4984#0" expanded="true" />
-                <element signature="e#5014#5015#0" expanded="true" />
-                <element signature="e#5051#5052#0" expanded="true" />
-                <element signature="e#5088#5089#0" expanded="true" />
-                <element signature="e#5128#5129#0" expanded="true" />
-                <element signature="e#5156#5157#0" expanded="true" />
-                <element signature="e#5187#5188#0" expanded="true" />
-                <element signature="e#5219#5220#0" expanded="true" />
-                <element signature="e#5254#5255#0" expanded="true" />
-                <element signature="e#5505#5506#0" expanded="true" />
-                <element signature="e#5536#5537#0" expanded="true" />
+                <element signature="e#4896#4897#0" expanded="true" />
+                <element signature="e#4929#4930#0" expanded="true" />
+                <element signature="e#4960#4961#0" expanded="true" />
+                <element signature="e#4997#4998#0" expanded="true" />
+                <element signature="e#5034#5035#0" expanded="true" />
+                <element signature="e#5074#5075#0" expanded="true" />
+                <element signature="e#5102#5103#0" expanded="true" />
+                <element signature="e#5133#5134#0" expanded="true" />
+                <element signature="e#5165#5166#0" expanded="true" />
+                <element signature="e#5200#5201#0" expanded="true" />
+                <element signature="e#5451#5452#0" expanded="true" />
+                <element signature="e#5482#5483#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="90" selection-start-line="2" selection-start-column="90" selection-end-line="2" selection-end-column="90" />
+            <state relative-caret-position="90">
+              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -116,8 +117,8 @@
         <option value="$PROJECT_DIR$/src/Nth_dimentionPoint.java" />
         <option value="$PROJECT_DIR$/src/Alignment_Library.java" />
         <option value="$PROJECT_DIR$/src/Nth_dimensionPoint.java" />
-        <option value="$PROJECT_DIR$/src/multiple_alignment.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/multiple_alignment.java" />
       </list>
     </option>
   </component>
@@ -250,7 +251,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32952926" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36091298" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32952926" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -309,12 +310,6 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Nth_dimensionPoint.java</url>
-          <line>22</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
           <line>86</line>
           <properties />
@@ -322,31 +317,49 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
-          <line>177</line>
+          <line>202</line>
           <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
-          <line>179</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
-          <line>172</line>
-          <properties />
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Nth_dimensionPoint.java</url>
-          <line>16</line>
+          <line>101</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
+          <line>197</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/multiple_alignment.java</url>
+          <line>227</line>
+          <properties />
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="31" />
     </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>1000</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/multiple_alignment.java">
@@ -361,6 +374,7 @@
             <element signature="method#multiple_alignment#0;class#multiple_alignment#0" />
             <element signature="docComment;method#multiple_alignment#2;class#multiple_alignment#0" />
             <element signature="method#multiple_alignment#2;class#multiple_alignment#0" />
+            <element signature="docComment;method#Nth_dimensionalMatrix_generate#0;class#multiple_alignment#0" />
           </folding>
         </state>
       </provider>
@@ -370,18 +384,18 @@
         <state relative-caret-position="378">
           <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#4983#4984#0" expanded="true" />
-            <element signature="e#5014#5015#0" expanded="true" />
-            <element signature="e#5051#5052#0" expanded="true" />
-            <element signature="e#5088#5089#0" expanded="true" />
-            <element signature="e#5128#5129#0" expanded="true" />
-            <element signature="e#5156#5157#0" expanded="true" />
-            <element signature="e#5187#5188#0" expanded="true" />
-            <element signature="e#5219#5220#0" expanded="true" />
-            <element signature="e#5254#5255#0" expanded="true" />
-            <element signature="e#5505#5506#0" expanded="true" />
-            <element signature="e#5536#5537#0" expanded="true" />
+            <element signature="e#4896#4897#0" expanded="true" />
+            <element signature="e#4929#4930#0" expanded="true" />
+            <element signature="e#4960#4961#0" expanded="true" />
+            <element signature="e#4997#4998#0" expanded="true" />
+            <element signature="e#5034#5035#0" expanded="true" />
+            <element signature="e#5074#5075#0" expanded="true" />
+            <element signature="e#5102#5103#0" expanded="true" />
+            <element signature="e#5133#5134#0" expanded="true" />
+            <element signature="e#5165#5166#0" expanded="true" />
+            <element signature="e#5200#5201#0" expanded="true" />
+            <element signature="e#5451#5452#0" expanded="true" />
+            <element signature="e#5482#5483#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -419,6 +433,7 @@
             <element signature="method#multiple_alignment#0;class#multiple_alignment#0" />
             <element signature="docComment;method#multiple_alignment#2;class#multiple_alignment#0" />
             <element signature="method#multiple_alignment#2;class#multiple_alignment#0" />
+            <element signature="docComment;method#Nth_dimensionalMatrix_generate#0;class#multiple_alignment#0" />
           </folding>
         </state>
       </provider>
@@ -442,18 +457,18 @@
         <state relative-caret-position="630">
           <caret line="35" column="69" lean-forward="true" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
           <folding>
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#4983#4984#0" expanded="true" />
-            <element signature="e#5014#5015#0" expanded="true" />
-            <element signature="e#5051#5052#0" expanded="true" />
-            <element signature="e#5088#5089#0" expanded="true" />
-            <element signature="e#5128#5129#0" expanded="true" />
-            <element signature="e#5156#5157#0" expanded="true" />
-            <element signature="e#5187#5188#0" expanded="true" />
-            <element signature="e#5219#5220#0" expanded="true" />
-            <element signature="e#5254#5255#0" expanded="true" />
-            <element signature="e#5505#5506#0" expanded="true" />
-            <element signature="e#5536#5537#0" expanded="true" />
+            <element signature="e#4896#4897#0" expanded="true" />
+            <element signature="e#4929#4930#0" expanded="true" />
+            <element signature="e#4960#4961#0" expanded="true" />
+            <element signature="e#4997#4998#0" expanded="true" />
+            <element signature="e#5034#5035#0" expanded="true" />
+            <element signature="e#5074#5075#0" expanded="true" />
+            <element signature="e#5102#5103#0" expanded="true" />
+            <element signature="e#5133#5134#0" expanded="true" />
+            <element signature="e#5165#5166#0" expanded="true" />
+            <element signature="e#5200#5201#0" expanded="true" />
+            <element signature="e#5451#5452#0" expanded="true" />
+            <element signature="e#5482#5483#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -486,13 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Phylogenetic_Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Alignment_Library.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -500,31 +508,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Phylogenetic_Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Nth_dimensionPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="-94">
+          <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="91" selection-end-column="19" />
           <folding>
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#4983#4984#0" expanded="true" />
-            <element signature="e#5014#5015#0" expanded="true" />
-            <element signature="e#5051#5052#0" expanded="true" />
-            <element signature="e#5088#5089#0" expanded="true" />
-            <element signature="e#5128#5129#0" expanded="true" />
-            <element signature="e#5156#5157#0" expanded="true" />
-            <element signature="e#5187#5188#0" expanded="true" />
-            <element signature="e#5219#5220#0" expanded="true" />
-            <element signature="e#5254#5255#0" expanded="true" />
-            <element signature="e#5505#5506#0" expanded="true" />
-            <element signature="e#5536#5537#0" expanded="true" />
+            <element signature="e#4896#4897#0" expanded="true" />
+            <element signature="e#4929#4930#0" expanded="true" />
+            <element signature="e#4960#4961#0" expanded="true" />
+            <element signature="e#4997#4998#0" expanded="true" />
+            <element signature="e#5034#5035#0" expanded="true" />
+            <element signature="e#5074#5075#0" expanded="true" />
+            <element signature="e#5102#5103#0" expanded="true" />
+            <element signature="e#5133#5134#0" expanded="true" />
+            <element signature="e#5165#5166#0" expanded="true" />
+            <element signature="e#5200#5201#0" expanded="true" />
+            <element signature="e#5451#5452#0" expanded="true" />
+            <element signature="e#5482#5483#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/jdk1.8.0_121/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="237" column="12" selection-start-line="237" selection-start-column="12" selection-end-line="237" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/multiple_alignment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="165" column="35" lean-forward="true" selection-start-line="165" selection-start-column="35" selection-end-line="165" selection-end-column="35" />
+        <state relative-caret-position="234">
+          <caret line="142" selection-start-line="142" selection-end-line="146" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#setMultiple_alignment#0;class#multiple_alignment#0" />
@@ -533,14 +562,8 @@
             <element signature="method#multiple_alignment#0;class#multiple_alignment#0" />
             <element signature="docComment;method#multiple_alignment#2;class#multiple_alignment#0" />
             <element signature="method#multiple_alignment#2;class#multiple_alignment#0" />
+            <element signature="docComment;method#Nth_dimensionalMatrix_generate#0;class#multiple_alignment#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="90" selection-start-line="2" selection-start-column="90" selection-end-line="2" selection-end-column="90" />
         </state>
       </provider>
     </entry>
