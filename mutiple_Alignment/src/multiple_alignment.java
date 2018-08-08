@@ -25,7 +25,7 @@ public class multiple_alignment {
                 return new multiple_alignment(s);
             }
             case "homework": return new multiple_alignment(true);
-            default: return null;
+            default: return new multiple_alignment();
         }
     }
 
@@ -61,7 +61,29 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     private multiple_alignment(boolean isHomework){
+        dimension=4;
+        target_seq=new String[dimension];
+        target_seq[0]="GARFIELDTHELASTFATCAT";
+        target_seq[1]="GARFIELDTHEFASTCAT";
+        target_seq[2]="GARFIELDTHEFATSCAT";
+        target_seq[3]="THEFATCAT";
+        penalty=-1;
+        syllabus="GARFIELDTHCS";
+        scoring_scheme=new float[syllabus.length()][syllabus.length()];
+        for(int i=0;i<syllabus.length();i++)
+            for(int j=0;j<syllabus.length();j++){
+                if(syllabus.charAt(i)==syllabus.charAt(j)) scoring_scheme[i][j]=1;
+                else scoring_scheme[i][j]=(float)0.5;
+            }
 
+        //corrected, using matrix scale only as big as sequence length
+        int dimension_1_length=1;
+        for(int j=0;j<target_seq.length;j++)
+            dimension_1_length*=(target_seq[j].length()+1);
+        multiDimension_matrix=new Nth_dimensionPoint[dimension_1_length];
+        answer=new String[dimension];
+        for(int i=0;i<answer.length;i++)
+            answer[i]="";
     }
 
     /**
@@ -125,6 +147,9 @@ public class multiple_alignment {
         }
         for(int m=0;m<maximunIndex.size();m++)
             Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
+        for(int n=0;n<answer.length;n++){
+            System.out.println(answer[n]);
+        }
     }
 
     /**
