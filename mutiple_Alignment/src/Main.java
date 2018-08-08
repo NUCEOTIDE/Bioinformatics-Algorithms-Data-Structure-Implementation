@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args){
         multiple_alignment homework= multiple_alignment.setMultiple_alignment("homework");
-        homework.Nth_dimensionalMatrix_initial(0,null);
+        //homework.Nth_dimensionalMatrix_initial(0,null);
         homework.getScoring_scheme();
         homework.dynamicProgramming_alignment();
         homework.get_multiDimensionMatrix();

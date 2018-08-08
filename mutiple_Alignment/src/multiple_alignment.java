@@ -132,19 +132,10 @@ public class multiple_alignment {
         Nth_dimensionalMatrix_generate(0,null);
 
         //finding the maximum point in the matrix
-//        List<Integer> maximunIndex=new ArrayList<>();
-//        maximunIndex.add(0,0);
-//        for(int k=1;k<multiDimension_matrix.length;k++){
-//            if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore())
-//                maximunIndex.set(1,k);
-//            else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
-//                maximunIndex.add(k);
-//        }
-//        for(int m=0;m<maximunIndex.size();m++)
-//            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
-//        for(int n=0;n<answer.length;n++){
-//            System.out.println(answer[n]);
-//        }
+        int[] maximumPoint=maximumScore_position();
+        //trace back
+        for(int i=0;i<maximumPoint.length;i++)
+            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[maximumPoint[i]]);
     }
 
     /**
@@ -163,7 +154,7 @@ public class multiple_alignment {
      * @param current_dimensionIndex an index to control the dimensional coordination generation
      * @param current_positionCoord current position coordination of a point in the matrix
      */
-    public void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
+    private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension){
             int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
             multiDimension_matrix[position]=new Nth_dimensionPoint(dimension,current_positionCoord,0,target_seq);
@@ -220,7 +211,7 @@ public class multiple_alignment {
      * @return the final maximum score of this point
      */
     private float maximum(int[] coordination,int position){
-        float final_score=-10000000;
+        float final_score=0;
         for(int i=1;i<=Math.pow(2,dimension)-1;i++){
             int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
             int previousPosition=Nth_dimensionPoint.previousPosition(coordination,binary_direction,target_seq);
@@ -231,6 +222,34 @@ public class multiple_alignment {
             }
         }
         return final_score;
+    }
+    private int[] maximumScore_position(){
+
+        List<Integer> maximunIndex=new ArrayList<>();
+        maximunIndex.add(0);
+        try{
+            for(int k=1;k<multiDimension_matrix.length;k++){
+                if(multiDimension_matrix[maximunIndex.get(0)].getScore()<multiDimension_matrix[k].getScore()){
+                    maximunIndex.clear();
+                    maximunIndex.add(k);
+                    //System.out.println(multiDimension_matrix[k].getScore());
+                }else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
+                    maximunIndex.add(k);
+            }
+            for(int m=0;m<maximunIndex.size();m++)
+                Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
+            for(int n=0;n<answer.length;n++){
+                System.out.println(answer[n]);
+            }
+
+        }catch (NullPointerException e){
+            System.out.println("Null character exist for unknown reason");
+        }finally {
+            int temp[]=new int[maximunIndex.size()];
+            for(int i=0;i<temp.length;i++)
+                temp[i]=maximunIndex.get(i);
+            return temp;
+        }
     }
 
     /**
@@ -285,6 +304,7 @@ public class multiple_alignment {
                     Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition]);
                 }
             }
+        else for(int i=0;i<answer.length;i++) answer[i]="";
     }
 
     public void get_multiDimensionMatrix(){
