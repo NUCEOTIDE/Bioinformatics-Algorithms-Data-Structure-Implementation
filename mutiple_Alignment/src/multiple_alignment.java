@@ -9,7 +9,7 @@ public class multiple_alignment {
     private String syllabus;  //syllabus string,should contain the gap symbol
     private float penalty;  //empty space penalty
     private int dimension;  //indicate dimension
-    private Nth_dimentionPoint[] multiDimension_matrix;  //multiple dimensional matrix
+    private Nth_dimensionPoint[] multiDimension_matrix;  //multiple dimensional matrix
     private String[] answer;  //answer string array
 
 
@@ -67,7 +67,7 @@ public class multiple_alignment {
             int dimension_1_length=1;
             for(int j=0;j<target_seq.length;j++)
                 dimension_1_length*=(target_seq[j].length()+1);
-            multiDimension_matrix=new Nth_dimentionPoint[dimension_1_length];
+            multiDimension_matrix=new Nth_dimensionPoint[dimension_1_length];
             answer=new String[dimension];
             for(int i=0;i<answer.length;i++)
                 answer[i]="";
@@ -106,7 +106,7 @@ public class multiple_alignment {
                 maximunIndex.add(k);
         }
         for(int m=0;m<maximunIndex.size();m++)
-            Nth_dimensionalMatrix_traceBack_getDirection(multiDimension_matrix[m]);
+            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
     }
 
     /**
@@ -122,8 +122,8 @@ public class multiple_alignment {
 
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension-1){
-            int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
-            multiDimension_matrix[position]=new Nth_dimentionPoint(dimension,current_positionCoord,0,target_seq);
+            int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
+            multiDimension_matrix[position]=new Nth_dimensionPoint(dimension,current_positionCoord,0,target_seq);
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
             for(int i=0;i<target_seq[0].length();i++){
@@ -139,7 +139,7 @@ public class multiple_alignment {
             for(int i=0;i<current_positionCoord.length;i++)
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
             if(temp_coordinateSum>1){
-                int position=Nth_dimentionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
+                int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
                 multiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
             }
         }else{
@@ -154,8 +154,8 @@ public class multiple_alignment {
     private float maximum(int[] coordination,int position){
         float final_score=0;
         for(int i=1;i<=Math.pow(2,dimension)-1;i++){
-            int[] binary_direction=Nth_dimentionPoint.binaryDirection(dimension,i);
-            int previousPosition=Nth_dimentionPoint.previousPosition(coordination,binary_direction,target_seq);
+            int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
+            int previousPosition=Nth_dimensionPoint.previousPosition(coordination,binary_direction,target_seq);
             float temp_score=multiDimension_matrix[previousPosition].getScore()+matching(position,binary_direction);
             if(final_score<temp_score)
                 final_score=temp_score;
@@ -177,25 +177,24 @@ public class multiple_alignment {
         target_seq[0]=target_seq[longestString_index];
         target_seq[longestString_index]=temp;
     }
-    private void Nth_dimensionalMatrix_traceBack_getDirection(Nth_dimentionPoint currentPoint){
-        for(int i=1;i<=Math.pow(2,dimension)-1;i++){
-            int[] binary_direction=Nth_dimentionPoint.binaryDirection(dimension,i);
-            int previousPosition
-                    =Nth_dimentionPoint.previousPosition(currentPoint.getCoordination(),binary_direction,target_seq);
-            if(multiDimension_matrix[previousPosition].getScore()  //the score of previous point
-                    +matching(Nth_dimentionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq),binary_direction)
-                    ==currentPoint.getScore())
-                Nth_dimensionalMatrix_traceBack(currentPoint,binary_direction);
-        }
-    }
-    private void Nth_dimensionalMatrix_traceBack(Nth_dimentionPoint currentPoint,int[] direction){
-        if(currentPoint.getScore()!=0){
-            //build the answer string
-            currentPoint.setTempSeq(direction);
-            for(int n=0;n<answer.length;n++)  //may be changed to the string buffer method
-                answer[n]=String.valueOf(currentPoint.getTempSeq()[n])+answer[n];
-
-        }
-
+    private void Nth_dimensionalMatrix_traceBack(Nth_dimensionPoint currentPoint){
+        if(currentPoint.getScore()!=0)
+            //get direction for both answer building and tracing back process
+            for(int i=1;i<=Math.pow(2,dimension)-1;i++){
+                int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
+                int previousPosition
+                        =Nth_dimensionPoint.previousPosition(currentPoint.getCoordination(),binary_direction,target_seq);
+                if(multiDimension_matrix[previousPosition].getScore()  //the score of previous point
+                        +matching(Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq),binary_direction)
+                        ==currentPoint.getScore()){
+                    //answer string array building
+                    currentPoint.setTempSeq(binary_direction);
+                    for(int n=0;n<answer.length;n++)  //may be changed to the string buffer method
+                        answer[n]=String.valueOf(currentPoint.getTempSeq()[n])+answer[n];
+                    //continue tracing back to the previous point
+                    Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition]);
+                }
+            }
+        else return;
     }
 }
