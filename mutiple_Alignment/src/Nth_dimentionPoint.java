@@ -14,17 +14,31 @@ public class Nth_dimentionPoint {
         for(int i=0;i<dimension;i++){
             seq[i]=target_seq[i].charAt(coordination[i]);
         }
-        System.arraycopy(seq,0,tempSeq,0,seq.length);
+        System.arraycopy(seq,0,tempSeq,0,seq.length);  //initialize the temp sequence as the sequence
     }
 
 
     public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq){
         int position=0;
-        for(int k=0;k<coordination.length-1;k++){
-            position+=coordination[k]*target_seq[k].length();
+        for(int k=0;k<coordination.length;k++){
+            int positionComponent=coordination[k];
+            for(int m=k+1;m<coordination.length-1;m++)
+                positionComponent*=target_seq[m].length();
+            position+=positionComponent;
         }
         position+=coordination[coordination.length-1];
         return position;
+    }
+
+    public static int[] binaryDirection(int dimension,int direction){
+          //might be errors, because of the different length of the string and binary code
+        int[] binary_direction=new int[dimension];
+        String directionString=Integer.toBinaryString(direction);
+        while(directionString.length()<dimension)
+            directionString="0"+directionString;  //may be changed to the string buffer method
+        for(int pos=0;pos<dimension;pos++)
+            binary_direction[pos]=(int)directionString.charAt(pos);
+        return binary_direction;
     }
 
     public static int previousPosition(int[] currentCoordination,int[] direction,String[] target_seq){
