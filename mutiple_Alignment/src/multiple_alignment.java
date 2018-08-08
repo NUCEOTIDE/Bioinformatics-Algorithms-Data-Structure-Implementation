@@ -60,22 +60,23 @@ public class multiple_alignment {
      * special constructor method specialized for this project
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
-    private multiple_alignment(boolean isHomework){
+    public multiple_alignment(boolean isHomework){
         dimension=4;
         target_seq=new String[dimension];
-        target_seq[0]="GARFIELDTHELASTFATCAT";
-        target_seq[1]="GARFIELDTHEFASTCAT";
-        target_seq[2]="GARFIELDTHEFATSCAT";
-        target_seq[3]="THEFATCAT";
+        target_seq[0]="TCA";
+        target_seq[1]="CGTTA";
+        target_seq[2]="ATCG";
+        target_seq[3]="ACTG";
         penalty=-1;
-        syllabus="GARFIELDTHCS";
+        syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
         for(int i=0;i<syllabus.length();i++)
             for(int j=0;j<syllabus.length();j++){
                 if(syllabus.charAt(i)==syllabus.charAt(j)) scoring_scheme[i][j]=1;
                 else scoring_scheme[i][j]=(float)0.5;
             }
-
+        sortTarget_seq();
+        modify_seq();
         //corrected, using matrix scale only as big as sequence length
         int dimension_1_length=1;
         for(int j=0;j<target_seq.length;j++)
@@ -127,16 +128,10 @@ public class multiple_alignment {
      *      maximum value in all align positions
      */
     public void dynamicProgramming_alignment(){
-        int[] temp_positionCoord=new int[1];
-        sortTarget_seq();
-        for(int i=0;i<target_seq[0].length();i++){
-            temp_positionCoord[0]=i;
-            Nth_dimensionalMatrix_initial(0,temp_positionCoord);
-        }
-        for(int j=0;j<target_seq[0].length();j++){
-            temp_positionCoord[0]=j;
-            Nth_dimensionalMatrix_generate(0,temp_positionCoord);
-        }
+        Nth_dimensionalMatrix_initial(0,null);
+        Nth_dimensionalMatrix_generate(0,null);
+
+        //finding the maximum point in the matrix
         List<Integer> maximunIndex=new ArrayList<>();
         maximunIndex.add(0);
         for(int k=1;k<multiDimension_matrix.length;k++){
@@ -168,13 +163,20 @@ public class multiple_alignment {
      * @param current_dimensionIndex an index to control the dimensional coordination generation
      * @param current_positionCoord current position coordination of a point in the matrix
      */
-    private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
-        if(current_dimensionIndex==dimension-1){
+    public void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
+        if(current_dimensionIndex==dimension){
             int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
             multiDimension_matrix[position]=new Nth_dimensionPoint(dimension,current_positionCoord,0,target_seq);
+        }else if(current_dimensionIndex==0){
+            int[] temp_positionCoord=new int[1];
+            for(int i=0;i<target_seq[0].length();i++){
+                temp_positionCoord[0]=i;
+                Nth_dimensionalMatrix_initial(1,temp_positionCoord);
+            }
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
-            for(int i=0;i<target_seq[0].length();i++){
+            System.arraycopy(current_positionCoord,0,nextCoord,0,current_positionCoord.length);
+            for(int i=0;i<target_seq[current_dimensionIndex].length();i++){
                 nextCoord[nextCoord.length-1]=i;
                 Nth_dimensionalMatrix_initial(current_dimensionIndex+1,nextCoord);
             }
@@ -187,7 +189,7 @@ public class multiple_alignment {
      * @param current_positionCoord current position coordination of a point in the matrix
      */
     private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
-        if(current_dimensionIndex==dimension-1){
+        if(current_dimensionIndex==dimension){
             int temp_coordinateSum=0;
             for(int i=0;i<current_positionCoord.length;i++)
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
@@ -195,9 +197,16 @@ public class multiple_alignment {
                 int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
                 multiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
             }
+        }else if(current_dimensionIndex==0){
+            int[] temp_positionCoord=new int[1];
+            for(int i=0;i<target_seq[0].length();i++){
+                temp_positionCoord[0]=i;
+                Nth_dimensionalMatrix_initial(1,temp_positionCoord);
+            }
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
-            for(int i=0;i<target_seq[0].length();i++){
+            System.arraycopy(current_positionCoord,0,nextCoord,0,current_positionCoord.length);
+            for(int i=0;i<target_seq[current_dimensionIndex].length();i++){
                 nextCoord[nextCoord.length-1]=i;
                 Nth_dimensionalMatrix_generate(current_dimensionIndex+1,nextCoord);
             }
@@ -247,6 +256,11 @@ public class multiple_alignment {
         target_seq[longestString_index]=temp;
     }
 
+    private void modify_seq(){
+        for(int i=0;i<target_seq.length;i++)
+            target_seq[i]="$"+target_seq[i];
+    }
+
     /**
      * trace back to build the answer string
      * @param currentPoint the current point object
@@ -269,5 +283,10 @@ public class multiple_alignment {
                     Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition]);
                 }
             }
+    }
+
+    public void get_multiDimensionMatrix(){
+        for(int i=0;i<multiDimension_matrix.length;i++)
+            System.out.println(multiDimension_matrix[i].getSeq()+" ");
     }
 }

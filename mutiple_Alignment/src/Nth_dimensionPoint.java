@@ -13,14 +13,14 @@ public class Nth_dimensionPoint {
      * @param target_seq the target sequences inputted
      */
     public Nth_dimensionPoint(int new_dimension,int[] new_coordination,float new_score,String[] target_seq){
-        coordination=new int[new_dimension];
-        for(int i=0;i<dimension;i++)
-            coordination[i]=new_coordination[i];
         dimension=new_dimension;
+        coordination=new int[dimension];
+        System.arraycopy(new_coordination,0,coordination,0,coordination.length);
         score=new_score;
-        for(int i=0;i<dimension;i++){
+        seq=new char[target_seq.length];
+        tempSeq=new char[target_seq.length];
+        for(int i=0;i<target_seq.length;i++)
             seq[i]=target_seq[i].charAt(coordination[i]);
-        }
         System.arraycopy(seq,0,tempSeq,0,seq.length);  //initialize the temp sequence as the sequence
     }
 
