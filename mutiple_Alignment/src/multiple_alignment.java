@@ -61,11 +61,11 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=2;
+        dimension=3;
         target_seq=new String[dimension];
         target_seq[0]="ACCGTTAACGTT";
         target_seq[1]="AACGCGTTACAC";
-//        target_seq[2]="AAAC";
+        target_seq[2]="AAAC";
 //        target_seq[3]="AAAG";
         penalty=-2;
         syllabus="ACTG";
@@ -80,7 +80,7 @@ public class multiple_alignment {
         //corrected, using matrix scale only as big as sequence length
         int dimension_1_length=1;
         for(int j=0;j<target_seq.length;j++)
-            dimension_1_length*=(target_seq[j].length()+1);
+            dimension_1_length*=(target_seq[j].length());
         multiDimension_matrix=new Nth_dimensionPoint[dimension_1_length];
         answer=new String[dimension];
         for(int i=0;i<answer.length;i++)
@@ -127,15 +127,18 @@ public class multiple_alignment {
      *      comparing all the possible combination to obtain
      *      maximum value in all align positions
      */
-    public void dynamicProgramming_alignment(){
+    public void dynamicProgramming_alignment(boolean isGlobal){
         Nth_dimensionalMatrix_initial(0,null);
-        Nth_dimensionalMatrix_generate(0,null);
+        Nth_dimensionalMatrix_generate(0,null,isGlobal);
 
         //finding the maximum point in the matrix
-        int[] maximumPoint=maximumScore_position();
-        //trace back
-        for(int i=0;i<maximumPoint.length;i++)
-            Nth_dimensionalMatrix_traceBack(multiDimension_matrix[maximumPoint[i]]);
+        if(!isGlobal){
+            int[] maximumPoint=maximumScore_position();
+            //trace back
+            for(int i=0;i<maximumPoint.length;i++)
+                Nth_dimensionalMatrix_traceBack(multiDimension_matrix[maximumPoint[i]],isGlobal);
+        }else Nth_dimensionalMatrix_traceBack(multiDimension_matrix[multiDimension_matrix.length-1],isGlobal);
+
     }
 
     /**
@@ -179,27 +182,27 @@ public class multiple_alignment {
      * @param current_dimensionIndex an index to control the dimensional coordination generation
      * @param current_positionCoord current position coordination of a point in the matrix
      */
-    private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord){
+    private void Nth_dimensionalMatrix_generate(int current_dimensionIndex,int[] current_positionCoord,boolean isGlobal){
         if(current_dimensionIndex==dimension){
             int temp_coordinateSum=0;
             for(int i=0;i<current_positionCoord.length;i++)
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
             if(temp_coordinateSum>1){
                 int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
-                multiDimension_matrix[position].setScore(maximum(current_positionCoord,position));
+                multiDimension_matrix[position].setScore(maximum(current_positionCoord,position,isGlobal));
             }
         }else if(current_dimensionIndex==0){
             int[] temp_positionCoord=new int[1];
             for(int i=0;i<target_seq[0].length();i++){
                 temp_positionCoord[0]=i;
-                Nth_dimensionalMatrix_generate(1,temp_positionCoord);
+                Nth_dimensionalMatrix_generate(1,temp_positionCoord,isGlobal);
             }
         }else{
             int[] nextCoord=new int[current_positionCoord.length+1];
             System.arraycopy(current_positionCoord,0,nextCoord,0,current_positionCoord.length);
             for(int i=0;i<target_seq[current_dimensionIndex].length();i++){
                 nextCoord[nextCoord.length-1]=i;
-                Nth_dimensionalMatrix_generate(current_dimensionIndex+1,nextCoord);
+                Nth_dimensionalMatrix_generate(current_dimensionIndex+1,nextCoord,isGlobal);
             }
         }
     }
@@ -210,8 +213,9 @@ public class multiple_alignment {
      * @param position the position in 1 dimensional matrix
      * @return the final maximum score of this point
      */
-    private float maximum(int[] coordination,int position){
+    private float maximum(int[] coordination,int position,boolean isGlobal){
         float final_score=0;
+        if(isGlobal) final_score=-1000;
         for(int i=1;i<=Math.pow(2,dimension)-1;i++){
             int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
             int previousPosition=Nth_dimensionPoint.previousPosition(coordination,binary_direction,target_seq);
@@ -236,12 +240,9 @@ public class multiple_alignment {
                 }else if(multiDimension_matrix[maximunIndex.get(0)].getScore()==multiDimension_matrix[k].getScore())
                     maximunIndex.add(k);
             }
-            for(int m=0;m<maximunIndex.size();m++)
-                Nth_dimensionalMatrix_traceBack(multiDimension_matrix[m]);
             for(int n=0;n<answer.length;n++){
                 System.out.println(answer[n]);
             }
-
         }catch (NullPointerException e){
             System.out.println("Null character exist for unknown reason");
         }finally {
@@ -286,13 +287,15 @@ public class multiple_alignment {
      * trace back to build the answer string
      * @param currentPoint the current point object
      */
-    private void Nth_dimensionalMatrix_traceBack(Nth_dimensionPoint currentPoint){
-        if(currentPoint.getScore()!=0)
+    private void Nth_dimensionalMatrix_traceBack(Nth_dimensionPoint currentPoint,boolean isGlobal){
+        int position=Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq);
+        if((currentPoint.getScore()!=0&&!isGlobal)||position!=0&&isGlobal)
             //get direction for both answer building and tracing back process
             for(int i=1;i<=Math.pow(2,dimension)-1;i++){
                 int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
                 int previousPosition  //previous position obtaining method can be changed to simplify
                         =Nth_dimensionPoint.previousPosition(currentPoint.getCoordination(),binary_direction,target_seq);
+                if(previousPosition<0) return;
                 if(multiDimension_matrix[previousPosition].getScore()  //the score of previous point
                         +matching(Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq),binary_direction)
                         ==currentPoint.getScore()){
@@ -301,17 +304,17 @@ public class multiple_alignment {
                     for(int n=0;n<answer.length;n++)  //may be changed to the string buffer method
                         answer[n]=String.valueOf(currentPoint.getTempSeq()[n])+answer[n];
                     //continue tracing back to the previous point
-                    Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition]);
+                    Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition],isGlobal);
                 }
             }
-        else for(int i=0;i<answer.length;i++) answer[i]="";
+        //else for(int i=0;i<answer.length;i++) answer[i]="";
     }
 
     public void get_multiDimensionMatrix(){
         try{
             for(int i=0;i<multiDimension_matrix.length;i++){
                 int[] temp_string=multiDimension_matrix[i].getCoordination();
-                System.out.print("{");
+                System.out.print(i+" {");
                 for(int j=0;j<temp_string.length;j++)
                     System.out.print(temp_string[j]+",");
                 System.out.println("}"+multiDimension_matrix[i].getScore());
@@ -321,7 +324,7 @@ public class multiple_alignment {
         }
     }
 
-    public void getScoring_scheme(){
+    public float[][] getScoring_scheme(){
         System.out.println(syllabus);
         for(int i=0;i<scoring_scheme.length;i++){
             System.out.print(syllabus.charAt(i)+" ");
@@ -329,5 +332,11 @@ public class multiple_alignment {
                 System.out.print(scoring_scheme[i][j]+" ");
             System.out.println();
         }
+        return this.scoring_scheme;
+    }
+    public String[] getAnswer(){
+        for(int i=0;i<answer.length;i++)
+            System.out.println(answer[i]);
+        return this.answer;
     }
 }
