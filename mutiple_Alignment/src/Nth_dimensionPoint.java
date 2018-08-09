@@ -30,15 +30,18 @@ public class Nth_dimensionPoint {
      * @param target_seq the target sequences inputted
      * @return a 1 dimensional position
      */
-    public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq){
+    public static int Nth_to_1st_dimension(int[] coordination,String[] target_seq,boolean outOfRange){
         int position=0;
-        for(int k=0;k<coordination.length-1;k++){
-            int positionComponent=coordination[k];
-            for(int m=k+1;m<coordination.length;m++)
-                positionComponent*=target_seq[m].length();
-            position+=positionComponent;
+        if(!outOfRange){
+            for(int k=0;k<coordination.length-1;k++){
+                int positionComponent=coordination[k];
+                for(int m=k+1;m<coordination.length;m++)
+                    positionComponent*=target_seq[m].length();
+                position+=positionComponent;
+            }
+            position+=coordination[coordination.length-1];
         }
-        position+=coordination[coordination.length-1];
+        else position=-1;
         return position;
     }
 
@@ -70,14 +73,16 @@ public class Nth_dimensionPoint {
      */
     public static int previousPosition(int[] currentCoordination,int[] direction,String[] target_seq){
         int[] previousCoordination=new int[currentCoordination.length];
+        boolean outOfRange=false;
         try{
-            for(int i=0;i<currentCoordination.length;i++)
+            for(int i=0;i<currentCoordination.length;i++){
                 previousCoordination[i]=currentCoordination[i]-direction[i];
+                if(previousCoordination[i]<0) outOfRange=true;
+            }
         }catch(IndexOutOfBoundsException e){
             System.out.println("something goes wrong...");
-        }finally{
-            return Nth_to_1st_dimension(previousCoordination,target_seq);
         }
+        return Nth_to_1st_dimension(previousCoordination,target_seq,outOfRange);
     }
 
     /**
@@ -141,7 +146,9 @@ public class Nth_dimensionPoint {
      * @param direction the binary direction coordination of one pointR
      */
     public void setTempSeq(int[] direction){
-        for(int i=0;i<direction.length;i++)
+        for(int i=0;i<direction.length;i++){
             if(direction[i]==0) tempSeq[i]='-';
+        }
+
     }
 }

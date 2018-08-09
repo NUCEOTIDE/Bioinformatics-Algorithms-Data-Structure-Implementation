@@ -61,13 +61,13 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=3;
+        dimension=4;
         target_seq=new String[dimension];
-        target_seq[0]="ACCGTTAACGTT";
-        target_seq[1]="AACGCGTTACAC";
-        target_seq[2]="AAAC";
-//        target_seq[3]="AAAG";
-        penalty=-2;
+        target_seq[0]="ACGTT";
+        target_seq[1]="AGTT";
+        target_seq[2]="AC";
+        target_seq[3]="AA";
+        penalty=-1;
         syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
         for(int i=0;i<syllabus.length();i++)
@@ -159,7 +159,7 @@ public class multiple_alignment {
      */
     private void Nth_dimensionalMatrix_initial(int current_dimensionIndex,int[] current_positionCoord){
         if(current_dimensionIndex==dimension){
-            int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
+            int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq,false);
             multiDimension_matrix[position]=new Nth_dimensionPoint(dimension,current_positionCoord,0,target_seq);
         }else if(current_dimensionIndex==0){
             int[] temp_positionCoord=new int[1];
@@ -188,7 +188,7 @@ public class multiple_alignment {
             for(int i=0;i<current_positionCoord.length;i++)
                 if(current_positionCoord[i]!=0) temp_coordinateSum++;
             if(temp_coordinateSum>1){
-                int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq);
+                int position=Nth_dimensionPoint.Nth_to_1st_dimension(current_positionCoord,target_seq,false);
                 multiDimension_matrix[position].setScore(maximum(current_positionCoord,position,isGlobal));
             }
         }else if(current_dimensionIndex==0){
@@ -283,31 +283,40 @@ public class multiple_alignment {
             target_seq[i]="$"+target_seq[i];
     }
 
+    private String modify_answer(){
+        String _answer="";
+        for(int i=0;i<answer.length;i++){
+            answer[i]+="\n";
+            _answer+=answer[i];
+            answer[i]="";
+        }
+        return _answer;
+    }
+
     /**
      * trace back to build the answer string
      * @param currentPoint the current point object
      */
     private void Nth_dimensionalMatrix_traceBack(Nth_dimensionPoint currentPoint,boolean isGlobal){
-        int position=Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq);
-        if((currentPoint.getScore()>0&&!isGlobal)||position>0&&isGlobal)
+        int position=Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq,false);
+        if(currentPoint.getScore()>0&&!isGlobal||position>0&&isGlobal)
             //get direction for both answer building and tracing back process
             for(int i=1;i<=Math.pow(2,dimension)-1;i++){
                 int[] binary_direction=Nth_dimensionPoint.binaryDirection(dimension,i);
                 int previousPosition  //previous position obtaining method can be changed to simplify
                         =Nth_dimensionPoint.previousPosition(currentPoint.getCoordination(),binary_direction,target_seq);
-                if(previousPosition>=0)
-                    if(multiDimension_matrix[previousPosition].getScore()  //the score of previous point
-                            +matching(Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq),binary_direction)
-                            ==currentPoint.getScore()){
-                        //answer string array building
-                        currentPoint.setTempSeq(binary_direction);
-                        for(int n=0;n<answer.length;n++)  //may be changed to the string buffer method
-                            answer[n]=String.valueOf(currentPoint.getTempSeq()[n])+answer[n];
-                        //continue tracing back to the previous point
-                        Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition],isGlobal);
-                    }
+                if(previousPosition>=0&&multiDimension_matrix[previousPosition].getScore()  //the score of previous point
+                        +matching(Nth_dimensionPoint.Nth_to_1st_dimension(currentPoint.getCoordination(),target_seq,false),binary_direction)
+                        ==currentPoint.getScore()){
+                    //answer string array building
+                    currentPoint.setTempSeq(binary_direction);
+                    for(int n=0;n<answer.length;n++)  //may be changed to the string buffer method
+                        answer[n]=String.valueOf(currentPoint.getTempSeq()[n])+answer[n];
+                    //continue tracing back to the previous point
+                    Nth_dimensionalMatrix_traceBack(multiDimension_matrix[previousPosition],isGlobal);
+                }
             }
-        else for(int i=0;i<answer.length;i++) answer[i]="";
+        else if(position==0) System.out.println(modify_answer());
     }
 
     public void get_multiDimensionMatrix(){
