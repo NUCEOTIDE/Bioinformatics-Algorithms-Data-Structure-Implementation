@@ -61,12 +61,14 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=4;
+        dimension=6;
         target_seq=new String[dimension];
-        target_seq[0]="ACGTT";
-        target_seq[1]="AGTT";
-        target_seq[2]="AC";
-        target_seq[3]="AA";
+        target_seq[0]="ACCGTTAACGTT";
+        target_seq[1]="AACGCGTTACAC";
+        target_seq[2]="ACGTTATACACT";
+        target_seq[3]="AAGTTATACGTT";
+        target_seq[4]="ACGTTAACGTTT";
+        target_seq[5]="ACGTTATAGTTA";
         penalty=-1;
         syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
@@ -128,6 +130,7 @@ public class multiple_alignment {
      *      maximum value in all align positions
      */
     public void dynamicProgramming_alignment(boolean isGlobal){
+        long time1=Timing.getTime_interval();
         Nth_dimensionalMatrix_initial(0,null);
         Nth_dimensionalMatrix_generate(0,null,isGlobal);
 
@@ -138,7 +141,8 @@ public class multiple_alignment {
             for(int i=0;i<maximumPoint.length;i++)
                 Nth_dimensionalMatrix_traceBack(multiDimension_matrix[maximumPoint[i]],isGlobal);
         }else Nth_dimensionalMatrix_traceBack(multiDimension_matrix[multiDimension_matrix.length-1],isGlobal);
-
+        long time2=Timing.getTime_interval();
+        Timing.interval_calculation(time1,time2);
     }
 
     /**
