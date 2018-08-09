@@ -91,7 +91,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="1013" />
     <option name="width" value="914" />
     <option name="height" value="1038" />
@@ -222,7 +222,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="811" y="0" width="731" height="830" extended-state="1" />
+    <frame x="811" y="0" width="731" height="830" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952926" />

@@ -61,14 +61,14 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=6;
+        dimension=3;
         target_seq=new String[dimension];
-        target_seq[0]="ACCGTTAACGTT";
-        target_seq[1]="AACGCGTTACAC";
-        target_seq[2]="ACGTTATACACT";
-        target_seq[3]="AAGTTATACGTT";
-        target_seq[4]="ACGTTAACGTTT";
-        target_seq[5]="ACGTTATAGTTA";
+        target_seq[0]="TCGCGCGTTTCGGTGATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCG";
+        target_seq[1]="GATTGTACTGAGAGTGCACCATATGCGGTGTGAAATACCGCACAGATGCGTAAGGAGAAAATACCGCATCAGGCGCCATTCGCCATTCAGGCTGCGCAAC";
+        target_seq[2]="GATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAG";
+//        target_seq[3]="GGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTG";
+//        target_seq[4]="AACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTGTTGGCG";
+//        target_seq[5]="CACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTGTTGGCGGGTGTCGGG";
         penalty=-1;
         syllabus="ACTG";
         scoring_scheme=new float[syllabus.length()][syllabus.length()];
