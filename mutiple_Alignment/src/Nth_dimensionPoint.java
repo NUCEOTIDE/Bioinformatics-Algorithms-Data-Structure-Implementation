@@ -119,24 +119,24 @@ public class Nth_dimensionPoint {
     public float getScore() {
         return this.score;
     }
-    public int getDimension(){
-        return this.dimension;
-    }
+//    public int getDimension(){
+//        return this.dimension;
+//    }
     public int[] getCoordination() {
         return this.coordination;
     }
-    public char[] getSeq(){
-        return this.seq;
-    }
+//    public char[] getSeq(){
+//        return this.seq;
+//    }
     public char[] getTempSeq(){
         return this.tempSeq;
     }
 
     //set methods
-    public void setCoordination(int[] new_coordination){
-        //coordination=new_coordination;
-        System.arraycopy(new_coordination,0,coordination,0,new_coordination.length);
-    }
+//    public void setCoordination(int[] new_coordination){
+//        //coordination=new_coordination;
+//        System.arraycopy(new_coordination,0,coordination,0,new_coordination.length);
+//    }
     public void setScore(float new_score){
         score=new_score;
     }

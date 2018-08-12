@@ -18,8 +18,8 @@
       <file leaf-file-name="smith_waterman.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2700">
-              <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="23" />
+            <state relative-caret-position="378">
+              <caret line="183" column="18" lean-forward="true" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -91,10 +91,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1013" />
-    <option name="width" value="914" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -103,8 +104,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -121,6 +120,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,8 +223,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="811" y="0" width="731" height="830" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952926" />
@@ -237,7 +237,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32952926" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2295989" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.5074184" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -261,49 +261,49 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>295</line>
           <properties />
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>174</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>73</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>212</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>214</line>
           <properties />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>216</line>
           <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>209</line>
           <properties />
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/smith_waterman.java</url>
+          <url />
           <line>309</line>
           <properties class="smith_waterman" method="answerConstructing">
             <option name="EMULATED" value="true" />
@@ -316,6 +316,10 @@
       </breakpoints-dialog>
       <option name="time" value="56" />
     </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://D:/jdk1.8.0_121/src.zip!/java/lang/Exception.java">
@@ -722,8 +726,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/smith_waterman.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2700">
-          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="23" />
+        <state relative-caret-position="378">
+          <caret line="183" column="18" lean-forward="true" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
         </state>
       </provider>
     </entry>
