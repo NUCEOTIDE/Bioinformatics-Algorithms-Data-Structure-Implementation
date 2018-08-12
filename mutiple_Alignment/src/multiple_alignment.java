@@ -61,12 +61,12 @@ public class multiple_alignment {
      * @param isHomework a boolean variable to determine if the call of this constructor is appropriate
      */
     public multiple_alignment(boolean isHomework){
-        dimension=3;
+        dimension=4;
         target_seq=new String[dimension];
-        target_seq[0]="TCGCGCGTTTCGGTGATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCG";
-        target_seq[1]="GATTGTACTGAGAGTGCACCATATGCGGTGTGAAATACCGCACAGATGCGTAAGGAGAAAATACCGCATCAGGCGCCATTCGCCATTCAGGCTGCGCAAC";
-        target_seq[2]="GATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAG";
-//        target_seq[3]="GGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTG";
+        target_seq[0]="TCGCGCGTTTCGGTGATGACGGTGAAAACCTCTGACACATGGTCTGTAAGCG";
+        target_seq[1]="GATTGTACTGAGAGTGCACCATATGCGGTGTGAAATACCGCCTTGTCTGTGT";
+        target_seq[2]="GATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGAC";
+        target_seq[3]="GGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCAC";
 //        target_seq[4]="AACCTCTGACACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTGTTGGCG";
 //        target_seq[5]="CACATGCAGCTCCCGGAGACGGTCACAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTGTTGGCGGGTGTCGGG";
         penalty=-1;
@@ -132,7 +132,11 @@ public class multiple_alignment {
     public void dynamicProgramming_alignment(boolean isGlobal){
         long time1=Timing.getTime_interval();
         Nth_dimensionalMatrix_initial(0,null);
+        long time3=Timing.getTime_interval();
+        Timing.interval_calculation("Initialization completed, time",time1,time3);
         Nth_dimensionalMatrix_generate(0,null,isGlobal);
+        long time4=Timing.getTime_interval();
+        Timing.interval_calculation("Initialization completed, time",time3,time4);
 
         //finding the maximum point in the matrix
         if(!isGlobal){
@@ -142,7 +146,7 @@ public class multiple_alignment {
                 Nth_dimensionalMatrix_traceBack(multiDimension_matrix[maximumPoint[i]],isGlobal);
         }else Nth_dimensionalMatrix_traceBack(multiDimension_matrix[multiDimension_matrix.length-1],isGlobal);
         long time2=Timing.getTime_interval();
-        Timing.interval_calculation(time1,time2);
+        Timing.interval_calculation("Path obtained, time",time1,time2);
     }
 
     /**

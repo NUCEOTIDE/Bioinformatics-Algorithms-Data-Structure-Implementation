@@ -6,7 +6,7 @@ public class Timing {
         long time=s.getTimeInMillis();
         return time;
     }
-    public static void interval_calculation(long a,long b){
-        System.out.println(b-a);
+    public static void interval_calculation(String output,long a,long b){
+        System.out.println(output+": "+(b-a));
     }
 }
